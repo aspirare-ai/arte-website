@@ -1,189 +1,173 @@
 ---
-import { siteContent } from '../content/site'
+import { siteConfig } from '../content/site';
+
+const currentYear = new Date().getFullYear();
+
+const footerSections = [
+  {
+    title: 'Platform',
+    links: [
+      { href: '/', label: 'Home' },
+      { href: '/platform', label: 'Platform' },
+      { href: '/industries', label: 'Industries' },
+      { href: '/contact', label: 'Contact' }
+    ]
+  },
+  {
+    title: 'Legal',
+    links: [
+      { href: '/privacy-policy', label: 'Privacy Policy' },
+      { href: '/terms-of-service', label: 'Terms of Service' },
+      { href: '/cookie-policy', label: 'Cookie Policy' }
+    ]
+  },
+  {
+    title: 'Contact',
+    links: [
+      { href: `mailto:${siteConfig.contact.email}`, label: siteConfig.contact.email, external: true },
+      { href: `tel:${siteConfig.contact.phone.replace(/\s/g, '')}`, label: siteConfig.contact.phone, external: true }
+    ]
+  }
+];
 ---
 
-<footer class='footer'>
-  <div class='container'>
-    <div class='footer-content'>
-      <div class='footer-brand'>
-        <div class='logo'>
-          <span class='logo-text'>{siteContent.company.name}</span>
-        </div>
-        <p class='footer-description'>{siteContent.company.description}</p>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3 class="footer-logo">{siteConfig.name}</h3>
+        <p class="footer-description">
+          Enterprise MLOps platform for AI-driven organizations
+        </p>
       </div>
 
-      <div class='footer-links'>
-        <div class='footer-section'>
-          <h4 class='footer-title'>Services</h4>
-          <ul class='footer-list'>
-            <li><a href='#services' class='footer-link'>AI Strategy</a></li>
-            <li>
-              <a href='#services' class='footer-link'>Process Automation</a>
-            </li>
-            <li>
-              <a href='#services' class='footer-link'>Data Intelligence</a>
-            </li>
+      {footerSections.map(section => (
+        <div class="footer-section">
+          <h4 class="footer-title">{section.title}</h4>
+          <ul class="footer-links">
+            {section.links.map(link => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
-
-        <div class='footer-section'>
-          <h4 class='footer-title'>Company</h4>
-          <ul class='footer-list'>
-            <li><a href='#about' class='footer-link'>About Us</a></li>
-            <li>
-              <a href='#case-studies' class='footer-link'>Case Studies</a>
-            </li>
-            <li><a href='#contact' class='footer-link'>Contact</a></li>
-          </ul>
-        </div>
-      </div>
+      ))}
     </div>
 
-    <div class='footer-bottom'>
-      <div class='footer-bottom-content'>
-        <p class='copyright'>
-          © 2025 {siteContent.company.legalName}. All rights reserved.
-        </p>
-        <div class='footer-bottom-links'>
-          <a href='/privacy-policy' class='footer-bottom-link'>Privacy Policy</a
-          >
-          <a href='/terms-of-service' class='footer-bottom-link'
-            >Terms of Service</a
-          >
-          <a href='/cookie-policy' class='footer-bottom-link'>Cookie Policy</a>
-        </div>
-      </div>
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} {siteConfig.name}. All rights reserved.</p>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: var(--color-gray-900);
-    color: var(--color-white);
-    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 4rem 2rem 2rem;
+    margin-top: 6rem;
   }
 
-  .footer-content {
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-main {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--spacing-2xl);
-    margin-bottom: var(--spacing-2xl);
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
   }
 
   .footer-brand {
-    max-width: 400px;
+    padding-right: 2rem;
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
-    font-weight: 600;
-    font-size: 1.25rem;
-  }
-
-  .logo-icon {
+  .footer-logo {
     font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
   }
 
   .footer-description {
-    color: var(--color-gray-300);
+    color: #b0b0b0;
     line-height: 1.6;
-  }
-
-  .footer-links {
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-    gap: var(--spacing-xl);
+    margin: 0;
   }
 
   .footer-title {
-    color: var(--color-white);
-    margin-bottom: var(--spacing-md);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
+    color: white;
+    margin: 0 0 1.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  .footer-list {
+  .footer-links {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
+    padding: 0;
+    margin: 0;
   }
 
-  .footer-link {
-    color: var(--color-gray-300);
+  .footer-links li {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links a {
+    color: #b0b0b0;
     text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
   }
 
-  .footer-link:hover {
-    color: var(--color-white);
+  .footer-links a:hover {
+    color: #0066cc;
   }
 
   .footer-bottom {
-    border-top: 1px solid #374151;
-    padding-top: var(--spacing-lg);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
   }
 
-  .footer-bottom-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+  .footer-bottom p {
+    margin: 0;
+    color: #808080;
+    font-size: 0.9rem;
   }
 
-  .copyright {
-    color: var(--color-gray-400);
-    font-size: 0.875rem;
+  @media (max-width: 968px) {
+    .footer-main {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+      padding-right: 0;
+    }
   }
 
-  .footer-bottom-links {
-    display: flex;
-    gap: var(--spacing-lg);
-  }
+  @media (max-width: 640px) {
+    .footer {
+      padding: 3rem 1.5rem 1.5rem;
+      margin-top: 4rem;
+    }
 
-  .footer-bottom-link {
-    color: var(--color-gray-400);
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 0.2s ease;
-  }
-
-  .footer-bottom-link:hover {
-    color: var(--color-white);
-  }
-
-  @media (max-width: 768px) {
-    .footer-content {
+    .footer-main {
       grid-template-columns: 1fr;
-      gap: var(--spacing-xl);
-    }
-
-    .footer-links {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-lg);
-    }
-
-    .footer-bottom-content {
-      flex-direction: column;
-      text-align: center;
-      gap: var(--spacing-sm);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .footer-links {
-      grid-template-columns: 1fr;
-    }
-
-    .footer-bottom-links {
-      flex-direction: column;
-      gap: var(--spacing-xs);
+      gap: 2rem;
     }
   }
 </style>

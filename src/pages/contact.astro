@@ -1,0 +1,314 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { contactContent } from '../content/contact';
+import { siteConfig } from '../content/site';
+---
+
+<Layout title="Contact">
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">{contactContent.hero.title}</h1>
+      <p class="hero-description">{contactContent.hero.description}</p>
+    </div>
+  </section>
+
+  <section class="demo section">
+    <div class="container">
+      <div class="demo-content">
+        <div class="demo-info">
+          <h2 class="demo-title">{contactContent.demo.title}</h2>
+          <p class="demo-description">{contactContent.demo.description}</p>
+          <ul class="benefits-list">
+            {contactContent.demo.benefits.map(benefit => (
+              <li>{benefit}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="demo-cta">
+          <div class="cta-card">
+            <h3>Start Your Journey with ARTE</h3>
+            <p>Our team is ready to show you how ARTE can revolutionize your ML operations</p>
+            <div class="cta-action">
+              <svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <p class="cta-text">Contact us to schedule your personalized demo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-methods section">
+    <div class="container">
+      <h2 class="section-title">{contactContent.contact.title}</h2>
+      <p class="section-subtitle">{contactContent.contact.description}</p>
+
+      <div class="methods-grid">
+        {contactContent.contact.methods.map(method => (
+          <div class="method-card">
+            <div class="method-icon">
+              {method.type === 'Email' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              )}
+              {method.type === 'Phone' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              )}
+              {method.type === 'Address' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="method-type">{method.type}</h3>
+            <p class="method-value">{method.value}</p>
+            <p class="method-description">{method.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="team section">
+    <div class="container">
+      <div class="team-box">
+        <h2 class="team-title">{contactContent.team.title}</h2>
+        <p class="team-description">{contactContent.team.description}</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: #4a4a4a;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .demo-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .demo-title {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .demo-description {
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .benefits-list li {
+    padding: 1rem 0 1rem 2.5rem;
+    position: relative;
+    color: #2d2d2d;
+    font-size: 1.05rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .benefits-list li:last-child {
+    border-bottom: none;
+  }
+
+  .benefits-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  .cta-card {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    padding: 3rem;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.2);
+  }
+
+  .cta-card h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .cta-card p {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .cta-action {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .cta-icon {
+    width: 40px;
+    height: 40px;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .cta-text {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .contact-methods {
+    background: #f8f9fa;
+  }
+
+  .methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .method-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .method-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .method-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  .method-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+
+  .method-type {
+    font-size: 1.25rem;
+    color: #0066cc;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .method-value {
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .method-description {
+    color: #4a4a4a;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .team-box {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .team-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .team-description {
+    color: #4a4a4a;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  @media (max-width: 968px) {
+    .demo-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .cta-card {
+      padding: 2rem;
+    }
+
+    .methods-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .method-card {
+      padding: 2rem;
+    }
+
+    .team-box {
+      padding: 2rem;
+    }
+  }
+</style>

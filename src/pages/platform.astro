@@ -1,0 +1,300 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { platformContent } from '../content/platform';
+---
+
+<Layout title="Platform">
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">{platformContent.hero.title}</h1>
+      <p class="hero-description">{platformContent.hero.description}</p>
+    </div>
+  </section>
+
+  <section class="architecture section">
+    <div class="container">
+      <h2 class="section-title">{platformContent.architecture.title}</h2>
+      <p class="section-subtitle">{platformContent.architecture.description}</p>
+
+      <div class="components-list">
+        {platformContent.architecture.components.map((component, index) => (
+          <div class="component-card">
+            <div class="component-number">{String(index + 1).padStart(2, '0')}</div>
+            <div class="component-content">
+              <h3 class="component-title">{component.title}</h3>
+              <p class="component-description">{component.description}</p>
+              <ul class="capabilities-list">
+                {component.capabilities.map(capability => (
+                  <li>{capability}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="technology section">
+    <div class="container">
+      <h2 class="section-title">{platformContent.technology.title}</h2>
+      <p class="section-subtitle">{platformContent.technology.description}</p>
+
+      <div class="tech-stack-grid">
+        {platformContent.technology.stack.map(category => (
+          <div class="tech-category">
+            <h3 class="tech-category-title">{category.category}</h3>
+            <ul class="tech-list">
+              {category.items.map(item => (
+                <li class="tech-item">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="security section">
+    <div class="container">
+      <h2 class="section-title">{platformContent.security.title}</h2>
+      <div class="security-grid">
+        {platformContent.security.features.map(feature => (
+          <div class="security-item">
+            <svg class="security-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <p>{feature}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Experience ARTE's Powerful Platform</h2>
+        <p>See how our comprehensive MLOps solution can streamline your entire ML lifecycle</p>
+        <Button href="/contact" variant="primary" size="large">
+          Request a Demo
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: #4a4a4a;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .components-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .component-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .component-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .component-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0066cc;
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: 0.3;
+  }
+
+  .component-content {
+    flex: 1;
+  }
+
+  .component-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  .component-description {
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .capabilities-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .capabilities-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    color: #2d2d2d;
+  }
+
+  .capabilities-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+    font-weight: 700;
+  }
+
+  .technology {
+    background: #f8f9fa;
+  }
+
+  .tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .tech-category {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .tech-category-title {
+    font-size: 1.25rem;
+    color: #0066cc;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+
+  .tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tech-item {
+    padding: 0.5rem 0;
+    color: #2d2d2d;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .tech-item:last-child {
+    border-bottom: none;
+  }
+
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .security-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .security-icon {
+    width: 28px;
+    height: 28px;
+    color: #0066cc;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .security-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #2d2d2d;
+    font-weight: 500;
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    color: white;
+  }
+
+  .cta-box {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-box h2 {
+    color: white;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-box p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .component-card {
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .component-number {
+      font-size: 2rem;
+    }
+
+    .capabilities-list {
+      grid-template-columns: 1fr;
+    }
+
+    .tech-stack-grid,
+    .security-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

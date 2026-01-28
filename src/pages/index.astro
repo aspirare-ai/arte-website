@@ -1,66 +1,282 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Header from '../components/Header.astro'
-import Hero from '../components/Hero.astro'
-import Services from '../components/Services.astro'
-import About from '../components/About.astro'
-import CaseStudies from '../components/CaseStudies.astro'
-import Contact from '../components/Contact.astro'
-import Footer from '../components/Footer.astro'
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { homeContent } from '../content/home';
 ---
 
-<Layout>
-  <Header />
-  <main>
-    <Hero />
-    <Services />
-    <About />
-    <CaseStudies />
-    <Contact />
-  </main>
-  <Footer />
+<Layout title="Home">
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">{homeContent.hero.title}</h1>
+        <p class="hero-subtitle">{homeContent.hero.subtitle}</p>
+        <p class="hero-description">{homeContent.hero.description}</p>
+        <div class="hero-cta">
+          <Button href="/contact" variant="primary" size="large">
+            {homeContent.hero.cta.primary}
+          </Button>
+          <Button href="/platform" variant="outline" size="large">
+            {homeContent.hero.cta.secondary}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features section">
+    <div class="container">
+      <h2 class="section-title">{homeContent.coreFunctionalities.title}</h2>
+      <p class="section-subtitle">{homeContent.coreFunctionalities.subtitle}</p>
+
+      <div class="features-grid">
+        {homeContent.coreFunctionalities.features.map(feature => (
+          <div class="feature-card">
+            <div class="feature-icon">
+              {feature.icon === 'brain' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a9 9 0 0 1 9 9 9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9z"/>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              )}
+              {feature.icon === 'analytics' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3v18h18"/>
+                  <path d="M18 17V9"/>
+                  <path d="M13 17V5"/>
+                  <path d="M8 17v-3"/>
+                </svg>
+              )}
+              {feature.icon === 'cycle' && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+                  <path d="M21 3v5h-5"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="feature-title">{feature.title}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits section">
+    <div class="container">
+      <h2 class="section-title">{homeContent.benefits.title}</h2>
+      <div class="benefits-grid">
+        {homeContent.benefits.items.map(benefit => (
+          <div class="benefit-item">
+            <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <p>{benefit}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to Transform Your ML Operations?</h2>
+        <p>Join leading organizations using ARTE to accelerate their AI initiatives</p>
+        <Button href="/contact" variant="primary" size="large">
+          Schedule a Demo
+        </Button>
+      </div>
+    </div>
+  </section>
 </Layout>
 
-<script>
-  // Intersection Observer for fade-in animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+<style>
+  .hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running'
-      }
-    })
-  }, observerOptions)
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 102, 204, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
 
-  // Observe all fade-in elements
-  document.querySelectorAll('.fade-in').forEach((el) => {
-    el.style.animationPlayState = 'paused'
-    observer.observe(el)
-  })
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
 
-  // Add scroll progress indicator
-  const scrollProgress = document.createElement('div')
-  scrollProgress.style.cssText = `
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 0%;
-		height: 3px;
-		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-		z-index: 9999;
-		transition: width 0.1s ease;
-	`
-  document.body.appendChild(scrollProgress)
+  .hero-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-  window.addEventListener('scroll', () => {
-    const scrolled =
-      (window.scrollY /
-        (document.documentElement.scrollHeight - window.innerHeight)) *
-      100
-    scrollProgress.style.width = scrolled + '%'
-  })
-</script>
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #0066cc;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-icon svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+  }
+
+  .feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  .feature-description {
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .benefits {
+    background: #f8f9fa;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .benefit-icon {
+    width: 24px;
+    height: 24px;
+    color: #0066cc;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .benefit-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #2d2d2d;
+    font-weight: 500;
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    color: white;
+  }
+
+  .cta-box {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-box h2 {
+    color: white;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-box p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    .hero-cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+    }
+
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

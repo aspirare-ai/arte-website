@@ -1,0 +1,75 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { href, variant = 'primary', size = 'medium' } = Astro.props;
+---
+
+<a href={href} class={`btn btn-${variant} btn-${size}`}>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-medium {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  .btn-large {
+    padding: 1.125rem 2.5rem;
+    font-size: 1.125rem;
+  }
+
+  .btn-primary {
+    background: #0066cc;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #0052a3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+  }
+
+  .btn-secondary {
+    background: #2d2d2d;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #0066cc;
+    border: 2px solid #0066cc;
+  }
+
+  .btn-outline:hover {
+    background: #0066cc;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.2);
+  }
+</style>

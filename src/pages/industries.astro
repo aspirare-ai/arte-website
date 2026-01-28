@@ -1,0 +1,216 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { industriesContent } from '../content/industries';
+---
+
+<Layout title="Industries">
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">{industriesContent.hero.title}</h1>
+      <p class="hero-description">{industriesContent.hero.description}</p>
+    </div>
+  </section>
+
+  <section class="industries section">
+    <div class="container">
+      <div class="industries-grid">
+        {industriesContent.industries.map(industry => (
+          <div class="industry-card">
+            <div class="industry-header">
+              <h2 class="industry-title">{industry.title}</h2>
+              <p class="industry-description">{industry.description}</p>
+            </div>
+
+            <div class="industry-features">
+              <h3 class="industry-section-title">Key Features</h3>
+              <ul class="features-list">
+                {industry.features.map(feature => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="industry-usecases">
+              <h3 class="industry-section-title">Use Cases</h3>
+              <ul class="usecases-list">
+                {industry.useCases.map(useCase => (
+                  <li>{useCase}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="industry-cta">
+              <Button href="/contact" variant="outline" size="medium">
+                Learn More
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to Transform Your Industry?</h2>
+        <p>Discover how ARTE can address your industry-specific challenges</p>
+        <Button href="/contact" variant="primary" size="large">
+          Schedule a Consultation
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: #4a4a4a;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .industry-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .industry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .industry-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(0, 102, 204, 0.1);
+  }
+
+  .industry-title {
+    font-size: 2rem;
+    color: #0066cc;
+    margin-bottom: 1rem;
+  }
+
+  .industry-description {
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .industry-features,
+  .industry-usecases {
+    margin-bottom: 2rem;
+  }
+
+  .industry-section-title {
+    font-size: 1.125rem;
+    color: #2d2d2d;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+  }
+
+  .features-list,
+  .usecases-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .features-list li,
+  .usecases-list li {
+    padding: 0.75rem 0 0.75rem 1.75rem;
+    position: relative;
+    color: #2d2d2d;
+    line-height: 1.6;
+  }
+
+  .features-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .usecases-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+    font-weight: 700;
+  }
+
+  .industry-cta {
+    margin-top: auto;
+    padding-top: 1.5rem;
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    color: white;
+  }
+
+  .cta-box {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-box h2 {
+    color: white;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-box p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .industries-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .industry-card {
+      padding: 2rem;
+    }
+  }
+</style>
