@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Hero from '../components/Hero.astro'
+import Services from '../components/Services.astro'
+import About from '../components/About.astro'
+import CaseStudies from '../components/CaseStudies.astro'
+import Contact from '../components/Contact.astro'
+import Footer from '../components/Footer.astro'
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero />
+    <Services />
+    <About />
+    <CaseStudies />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running'
+      }
+    })
+  }, observerOptions)
+
+  // Observe all fade-in elements
+  document.querySelectorAll('.fade-in').forEach((el) => {
+    el.style.animationPlayState = 'paused'
+    observer.observe(el)
+  })
+
+  // Add scroll progress indicator
+  const scrollProgress = document.createElement('div')
+  scrollProgress.style.cssText = `
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 0%;
+		height: 3px;
+		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+		z-index: 9999;
+		transition: width 0.1s ease;
+	`
+  document.body.appendChild(scrollProgress)
+
+  window.addEventListener('scroll', () => {
+    const scrolled =
+      (window.scrollY /
+        (document.documentElement.scrollHeight - window.innerHeight)) *
+      100
+    scrollProgress.style.width = scrolled + '%'
+  })
+</script>

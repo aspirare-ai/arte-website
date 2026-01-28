@@ -1,0 +1,96 @@
+---
+interface Props {
+  title: string
+  body: string[]
+  href?: string
+  linkText?: string
+  img?: ImageMetadata
+  color: string
+}
+
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+const { title, body, href, linkText, img, color } = Astro.props
+---
+
+<li class='card' style={{ backgroundColor: color }}>
+  {img && <Image src={img} aria-hidden alt='Texture image' />}
+  <div class='content-container'>
+    <h2>
+      {title}
+    </h2>
+    {body.map((p) => <p>{p}</p>)}
+
+    {
+      linkText && (
+        <div class='link-container'>
+          <a href={href}>{linkText}</a>
+        </div>
+      )
+    }
+  </div>
+</li>
+<style>
+  .card {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5625rem;
+    border: 1px solid #d1ecc2;
+
+    padding: 2.5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card img {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: contain;
+
+    mix-blend-mode: overlay;
+  }
+
+  .content-container {
+    mix-blend-mode: multiply;
+  }
+
+  .card h2 {
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.5rem; /* 111.111% */
+    letter-spacing: 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .card div.link-container {
+    border-radius: 0.625rem;
+    background: #181d1c;
+    padding: 1rem 1.1875rem;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    mix-blend-mode: multiply;
+  }
+
+  .card p {
+    margin-bottom: 1.5rem;
+  }
+
+  .card a {
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.225rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+</style>
