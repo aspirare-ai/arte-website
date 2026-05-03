@@ -112,7 +112,8 @@ const isActive = (href: string) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-5);
+    gap: var(--space-4);
+    flex-wrap: nowrap;
   }
 
   .logo {
@@ -122,6 +123,7 @@ const isActive = (href: string) => {
     color: var(--color-ink);
     text-decoration: none;
     font-weight: 700;
+    flex-shrink: 0;
   }
 
   .logo-mark {
@@ -187,6 +189,7 @@ const isActive = (href: string) => {
     display: flex;
     align-items: center;
     gap: var(--space-3);
+    flex-shrink: 0;
   }
 
   .cta-pill {
@@ -352,7 +355,7 @@ const isActive = (href: string) => {
   }
 
   /* Breakpoints */
-  @media (max-width: 960px) {
+  @media (max-width: 768px) {
     .nav-desktop {
       display: none;
     }
