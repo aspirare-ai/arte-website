@@ -71,22 +71,24 @@ const isActive = (href: string) => {
     top: 0;
   }
 
+  /* NOTE: deliberately NOT using backdrop-filter on .site-header — it
+     creates a containing block that breaks position:fixed for the
+     mobile drawer (.primary-nav). Use a near-opaque background instead. */
   .site-header {
     display: block;
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(247, 245, 238, 0.92);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    background: rgba(247, 245, 238, 0.96);
     border-bottom: 1px solid var(--color-line);
     transition: border-color 0.25s ease, background 0.25s ease;
   }
 
   .site-header.is-scrolled {
     border-bottom-color: var(--color-line-strong);
-    background: rgba(247, 245, 238, 0.96);
+    background: var(--color-bg);
+    box-shadow: 0 1px 0 var(--color-line);
   }
 
   .site-header__inner {
@@ -275,7 +277,9 @@ const isActive = (href: string) => {
       left: 0;
       right: 0;
       bottom: 0;
-      width: 100%;
+      width: 100vw;
+      height: calc(100vh - var(--header-height));
+      height: calc(100dvh - var(--header-height));
       background: var(--color-bg);
       border-top: 1px solid var(--color-line);
       flex-direction: column;
@@ -285,7 +289,8 @@ const isActive = (href: string) => {
       transform: translateY(-110%);
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       overflow-y: auto;
-      z-index: 999;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1100;
       visibility: hidden;
     }
 
@@ -341,6 +346,14 @@ const isActive = (href: string) => {
       var toggle = document.getElementById('navToggle');
       var nav = document.getElementById('primaryNav');
 
+      // Defensive reset on every page load (incl. bfcache restores)
+      document.body.classList.remove('is-menu-open');
+      if (nav) nav.classList.remove('is-open');
+      if (toggle) {
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
       if (toggle && nav) {
         toggle.addEventListener('click', function (e) {
           e.preventDefault();
@@ -386,5 +399,10 @@ const isActive = (href: string) => {
     } else {
       init();
     }
+
+    // Reset state when the page is restored from bfcache (back/forward)
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) init();
+    });
   })();
 </script>
