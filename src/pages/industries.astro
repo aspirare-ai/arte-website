@@ -2,62 +2,79 @@
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import { industriesContent } from '../content/industries';
+
+const industryIcons: Record<string, string> = {
+  government: 'M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6',
+  enterprise: 'M3 21h18M5 21V7h6v14M11 21V3h6v18M7 11h2M7 15h2M7 19h2M13 7h2M13 11h2M13 15h2M13 19h2',
+  education: 'M22 10 12 4 2 10l10 6 10-6Z M6 12v5c0 2 3 3 6 3s6-1 6-3v-5',
+  healthcare: 'M19 14V8a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v6 M5 14v2a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-2 M9 11h6 M12 8v6'
+};
 ---
 
 <Layout title="Industries">
-  <section class="hero">
-    <div class="container">
-      <h1 class="hero-title">{industriesContent.hero.title}</h1>
+  <!-- Hero -->
+  <section class="hero backdrop-grid">
+    <div class="container hero-inner">
+      <span class="eyebrow">{industriesContent.hero.eyebrow}</span>
+      <h1 class="hero-title">
+        {industriesContent.hero.title}{' '}
+        <span class="display-serif">{industriesContent.hero.titleAccent}</span>
+      </h1>
       <p class="hero-description">{industriesContent.hero.description}</p>
     </div>
   </section>
 
+  <!-- Cards -->
   <section class="industries section">
     <div class="container">
       <div class="industries-grid">
         {industriesContent.industries.map(industry => (
-          <div class="industry-card">
-            <div class="industry-header">
-              <h2 class="industry-title">{industry.title}</h2>
-              <p class="industry-description">{industry.description}</p>
-            </div>
+          <article class="industry-card">
+            <header class="industry-header">
+              <span class="industry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={industryIcons[industry.icon]} />
+                </svg>
+              </span>
+              <div>
+                <h2 class="industry-title">{industry.title}</h2>
+                <p class="industry-tagline">{industry.tagline}</p>
+              </div>
+            </header>
 
-            <div class="industry-features">
-              <h3 class="industry-section-title">Key Features</h3>
+            <p class="industry-description">{industry.description}</p>
+
+            <div class="industry-section">
+              <h3 class="industry-section-title">Key features</h3>
               <ul class="features-list">
-                {industry.features.map(feature => (
-                  <li>{feature}</li>
-                ))}
+                {industry.features.map(feature => <li>{feature}</li>)}
               </ul>
             </div>
 
-            <div class="industry-usecases">
-              <h3 class="industry-section-title">Use Cases</h3>
+            <div class="industry-section">
+              <h3 class="industry-section-title">Use cases</h3>
               <ul class="usecases-list">
-                {industry.useCases.map(useCase => (
-                  <li>{useCase}</li>
-                ))}
+                {industry.useCases.map(useCase => <li>{useCase}</li>)}
               </ul>
             </div>
 
             <div class="industry-cta">
-              <Button href="/contact" variant="outline" size="medium">
-                Learn More
-              </Button>
+              <a href="/contact" class="link-arrow">Talk to our team</a>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="cta-section section">
+  <!-- Final CTA -->
+  <section class="final-cta section">
     <div class="container">
-      <div class="cta-box">
-        <h2>Ready to Transform Your Industry?</h2>
-        <p>Discover how ARTE can address your industry-specific challenges</p>
+      <div class="final-cta-inner">
+        <h2 class="final-cta-title">{industriesContent.finalCta.title}</h2>
+        <p class="final-cta-body">{industriesContent.finalCta.body}</p>
         <Button href="/contact" variant="primary" size="large">
-          Schedule a Consultation
+          {industriesContent.finalCta.primary}
         </Button>
       </div>
     </div>
@@ -65,79 +82,133 @@ import { industriesContent } from '../content/industries';
 </Layout>
 
 <style>
+  /* Hero */
   .hero {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 6rem 2rem 4rem;
+    padding: clamp(4rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
     text-align: center;
+    max-width: 880px;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin: var(--space-5) 0 var(--space-5);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-title .display-serif {
+    display: block;
+    margin-top: 0.15em;
   }
 
   .hero-description {
-    font-size: 1.25rem;
-    color: #4a4a4a;
-    max-width: 800px;
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    color: var(--color-ink-soft);
+    max-width: 60ch;
     margin: 0 auto;
-    line-height: 1.7;
+  }
+
+  /* Industries */
+  .industries {
+    background: var(--color-surface-2);
   }
 
   .industries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: var(--space-5);
   }
 
   .industry-card {
-    background: white;
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7);
     display: flex;
     flex-direction: column;
+    gap: var(--space-5);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .industry-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent), transparent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
   }
 
   .industry-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    border-color: var(--color-line-strong);
+    box-shadow: 0 18px 40px -24px rgba(31, 79, 192, 0.18);
+  }
+
+  .industry-card:hover::before {
+    opacity: 1;
   }
 
   .industry-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid rgba(0, 102, 204, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .industry-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-dark);
+    border-radius: var(--radius-md);
+  }
+
+  .industry-icon svg {
+    width: 26px;
+    height: 26px;
   }
 
   .industry-title {
-    font-size: 2rem;
-    color: #0066cc;
-    margin-bottom: 1rem;
+    margin: 0;
+    font-size: 1.7rem;
+  }
+
+  .industry-tagline {
+    margin: 0.25rem 0 0;
+    color: var(--color-ink-muted);
+    font-size: 0.95rem;
+    font-style: italic;
   }
 
   .industry-description {
-    color: #4a4a4a;
-    line-height: 1.7;
+    color: var(--color-ink-soft);
     margin: 0;
-  }
-
-  .industry-features,
-  .industry-usecases {
-    margin-bottom: 2rem;
+    line-height: 1.6;
   }
 
   .industry-section-title {
-    font-size: 1.125rem;
-    color: #2d2d2d;
-    margin-bottom: 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
     font-weight: 600;
+    color: var(--color-accent-dark);
+    margin: 0 0 var(--space-3);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.9rem;
+    letter-spacing: 0.16em;
   }
 
   .features-list,
@@ -145,72 +216,80 @@ import { industriesContent } from '../content/industries';
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
   }
 
   .features-list li,
   .usecases-list li {
-    padding: 0.75rem 0 0.75rem 1.75rem;
     position: relative;
-    color: #2d2d2d;
-    line-height: 1.6;
+    padding-left: 1.25rem;
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.5;
   }
 
   .features-list li::before {
     content: '✓';
     position: absolute;
     left: 0;
-    color: #0066cc;
+    top: 0;
+    color: var(--color-accent);
     font-weight: 700;
-    font-size: 1.1rem;
   }
 
   .usecases-list li::before {
-    content: '→';
+    content: '';
     position: absolute;
     left: 0;
-    color: #0066cc;
-    font-weight: 700;
+    top: 0.6em;
+    width: 8px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 2px;
   }
 
   .industry-cta {
     margin-top: auto;
-    padding-top: 1.5rem;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-line);
   }
 
-  .cta-section {
-    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-    color: white;
-  }
-
-  .cta-box {
+  /* Final CTA */
+  .final-cta-inner {
     text-align: center;
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl);
   }
 
-  .cta-box h2 {
-    color: white;
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 1rem;
+  .final-cta-title {
+    margin-bottom: var(--space-3);
   }
 
-  .cta-box p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.95;
+  .final-cta-body {
+    color: var(--color-ink-soft);
+    margin: 0 auto var(--space-6);
+    max-width: 50ch;
   }
 
+  /* Responsive */
   @media (max-width: 768px) {
-    .hero {
-      padding: 4rem 1.5rem 3rem;
-    }
-
     .industries-grid {
       grid-template-columns: 1fr;
     }
 
     .industry-card {
-      padding: 2rem;
+      padding: var(--space-6);
+    }
+
+    .features-list,
+    .usecases-list {
+      grid-template-columns: 1fr;
     }
   }
 </style>

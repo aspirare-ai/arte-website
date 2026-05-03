@@ -5,22 +5,61 @@ import { platformContent } from '../content/platform';
 ---
 
 <Layout title="Platform">
-  <section class="hero">
-    <div class="container">
-      <h1 class="hero-title">{platformContent.hero.title}</h1>
+  <!-- Hero -->
+  <section class="hero backdrop-grid">
+    <div class="container hero-inner">
+      <span class="eyebrow">{platformContent.hero.eyebrow}</span>
+      <h1 class="hero-title">
+        {platformContent.hero.title}{' '}
+        <span class="display-serif">{platformContent.hero.titleAccent}</span>
+      </h1>
       <p class="hero-description">{platformContent.hero.description}</p>
     </div>
   </section>
 
+  <!-- Lifecycle flow -->
+  <section class="flow section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">{platformContent.flow.eyebrow}</span>
+        <h2>
+          {platformContent.flow.title}{' '}
+          <span class="display-serif">{platformContent.flow.titleAccent}</span>
+        </h2>
+        <p class="lede">{platformContent.flow.description}</p>
+      </div>
+
+      <ol class="flow-steps">
+        {platformContent.flow.steps.map(step => (
+          <li class="flow-step">
+            <div class="flow-step-num">{step.step}</div>
+            <h3 class="flow-step-title">{step.title}</h3>
+            <p class="flow-step-body">{step.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Architecture -->
   <section class="architecture section">
     <div class="container">
-      <h2 class="section-title">{platformContent.architecture.title}</h2>
-      <p class="section-subtitle">{platformContent.architecture.description}</p>
+      <div class="section-heading">
+        <span class="eyebrow">{platformContent.architecture.eyebrow}</span>
+        <h2>
+          {platformContent.architecture.title}{' '}
+          <span class="display-serif">{platformContent.architecture.titleAccent}</span>
+        </h2>
+        <p class="lede">{platformContent.architecture.description}</p>
+      </div>
 
       <div class="components-list">
         {platformContent.architecture.components.map((component, index) => (
-          <div class="component-card">
-            <div class="component-number">{String(index + 1).padStart(2, '0')}</div>
+          <article class="component-card">
+            <div class="component-side">
+              <div class="component-number">{String(index + 1).padStart(2, '0')}</div>
+              <div class="component-rule" aria-hidden="true"></div>
+            </div>
             <div class="component-content">
               <h3 class="component-title">{component.title}</h3>
               <p class="component-description">{component.description}</p>
@@ -30,16 +69,23 @@ import { platformContent } from '../content/platform';
                 ))}
               </ul>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- Technology stack -->
   <section class="technology section">
     <div class="container">
-      <h2 class="section-title">{platformContent.technology.title}</h2>
-      <p class="section-subtitle">{platformContent.technology.description}</p>
+      <div class="section-heading">
+        <span class="eyebrow">{platformContent.technology.eyebrow}</span>
+        <h2>
+          {platformContent.technology.title}{' '}
+          <span class="display-serif">{platformContent.technology.titleAccent}</span>
+        </h2>
+        <p class="lede">{platformContent.technology.description}</p>
+      </div>
 
       <div class="tech-stack-grid">
         {platformContent.technology.stack.map(category => (
@@ -56,29 +102,41 @@ import { platformContent } from '../content/platform';
     </div>
   </section>
 
+  <!-- Security -->
   <section class="security section">
     <div class="container">
-      <h2 class="section-title">{platformContent.security.title}</h2>
-      <div class="security-grid">
-        {platformContent.security.features.map(feature => (
-          <div class="security-item">
-            <svg class="security-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            <p>{feature}</p>
-          </div>
-        ))}
+      <div class="security-card">
+        <div class="security-text">
+          <span class="eyebrow">{platformContent.security.eyebrow}</span>
+          <h2 class="security-title">
+            {platformContent.security.title}{' '}
+            <span class="display-serif">{platformContent.security.titleAccent}</span>
+          </h2>
+          <p class="security-body">{platformContent.security.description}</p>
+        </div>
+        <ul class="security-grid">
+          {platformContent.security.features.map(feature => (
+            <li class="security-item">
+              <svg class="security-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
 
-  <section class="cta-section section">
+  <!-- CTA -->
+  <section class="final-cta section">
     <div class="container">
-      <div class="cta-box">
-        <h2>Experience ARTE's Powerful Platform</h2>
-        <p>See how our comprehensive MLOps solution can streamline your entire ML lifecycle</p>
+      <div class="final-cta-inner">
+        <h2 class="final-cta-title">{platformContent.finalCta.title}</h2>
+        <p class="final-cta-body">{platformContent.finalCta.body}</p>
         <Button href="/contact" variant="primary" size="large">
-          Request a Demo
+          {platformContent.finalCta.primary}
         </Button>
       </div>
     </div>
@@ -86,73 +144,144 @@ import { platformContent } from '../content/platform';
 </Layout>
 
 <style>
+  /* Hero */
   .hero {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 6rem 2rem 4rem;
+    padding: clamp(4rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
     text-align: center;
+    max-width: 880px;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin: var(--space-5) 0 var(--space-5);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-title .display-serif {
+    display: block;
+    margin-top: 0.15em;
   }
 
   .hero-description {
-    font-size: 1.25rem;
-    color: #4a4a4a;
-    max-width: 800px;
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    color: var(--color-ink-soft);
+    max-width: 60ch;
     margin: 0 auto;
-    line-height: 1.7;
   }
 
+  /* Flow */
+  .flow {
+    background: var(--color-surface-2);
+  }
+
+  .flow-steps {
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-3);
+    padding: 0;
+    margin: 0;
+  }
+
+  .flow-step {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .flow-step:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent-soft);
+  }
+
+  .flow-step-num {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .flow-step-title {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .flow-step-body {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  /* Architecture */
   .components-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: var(--space-4);
   }
 
   .component-card {
-    background: white;
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    display: flex;
-    gap: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-6);
+    transition: border-color 0.25s ease, transform 0.25s ease;
   }
 
   .component-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-line-strong);
     transform: translateY(-2px);
   }
 
-  .component-number {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #0066cc;
-    line-height: 1;
-    flex-shrink: 0;
-    opacity: 0.3;
+  .component-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
   }
 
-  .component-content {
-    flex: 1;
+  .component-number {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .component-rule {
+    width: 32px;
+    height: 2px;
+    background: var(--color-accent-soft);
+    border-radius: 2px;
   }
 
   .component-title {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    color: #1a1a1a;
+    margin: 0 0 var(--space-3);
+    font-size: 1.6rem;
   }
 
   .component-description {
-    color: #4a4a4a;
+    margin: 0 0 var(--space-5);
+    color: var(--color-ink-soft);
     line-height: 1.7;
-    margin-bottom: 1.5rem;
   }
 
   .capabilities-list {
@@ -160,46 +289,54 @@ import { platformContent } from '../content/platform';
     padding: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem 1.5rem;
   }
 
   .capabilities-list li {
-    padding-left: 1.5rem;
     position: relative;
-    color: #2d2d2d;
+    padding-left: 1.5rem;
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
   }
 
   .capabilities-list li::before {
-    content: '→';
+    content: '';
     position: absolute;
     left: 0;
-    color: #0066cc;
-    font-weight: 700;
+    top: 0.55em;
+    width: 12px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 2px;
   }
 
+  /* Technology */
   .technology {
-    background: #f8f9fa;
+    background: var(--color-bg-alt);
   }
 
   .tech-stack-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
   }
 
   .tech-category {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-line);
   }
 
   .tech-category-title {
-    font-size: 1.25rem;
-    color: #0066cc;
-    margin-bottom: 1.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
     font-weight: 600;
+    color: var(--color-accent-dark);
+    margin: 0 0 var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
   }
 
   .tech-list {
@@ -209,91 +346,140 @@ import { platformContent } from '../content/platform';
   }
 
   .tech-item {
-    padding: 0.5rem 0;
-    color: #2d2d2d;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 0;
+    color: var(--color-ink);
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-line);
   }
 
   .tech-item:last-child {
     border-bottom: none;
   }
 
-  .security-grid {
+  /* Security */
+  .security-card {
+    background: var(--color-ink);
+    border-radius: var(--radius-xl);
+    padding: clamp(2rem, 5vw, 4rem);
+    color: #ece9df;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .security-card::before {
+    content: '';
+    position: absolute;
+    inset: auto auto -50% -10%;
+    width: 60%;
+    height: 130%;
+    background: radial-gradient(circle, rgba(47, 111, 237, 0.45) 0%, transparent 60%);
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  .security-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .security-text .eyebrow {
+    background: rgba(158, 192, 255, 0.18);
+    color: #c8d8ff;
+  }
+
+  .security-title {
+    color: #ffffff;
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    margin: var(--space-4) 0;
+    line-height: 1.1;
+  }
+
+  .security-body {
+    color: #c1bdb1;
+    margin: 0;
+  }
+
+  .security-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    position: relative;
+    z-index: 1;
   }
 
   .security-item {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: #ece9df;
+    font-size: 0.95rem;
   }
 
   .security-icon {
-    width: 28px;
-    height: 28px;
-    color: #0066cc;
+    width: 20px;
+    height: 20px;
+    color: #9ec0ff;
     flex-shrink: 0;
-    margin-top: 0.25rem;
+    margin-top: 0.1em;
   }
 
-  .security-item p {
-    margin: 0;
-    font-size: 1rem;
-    color: #2d2d2d;
-    font-weight: 500;
-  }
-
-  .cta-section {
-    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-    color: white;
-  }
-
-  .cta-box {
+  /* Final CTA */
+  .final-cta-inner {
     text-align: center;
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl);
   }
 
-  .cta-box h2 {
-    color: white;
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 1rem;
+  .final-cta-title {
+    margin-bottom: var(--space-3);
   }
 
-  .cta-box p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.95;
+  .final-cta-body {
+    color: var(--color-ink-soft);
+    margin: 0 auto var(--space-6);
+    max-width: 50ch;
   }
 
+  /* Responsive */
   @media (max-width: 768px) {
-    .hero {
-      padding: 4rem 1.5rem 3rem;
-    }
-
     .component-card {
-      flex-direction: column;
-      padding: 2rem;
+      grid-template-columns: 1fr;
+      padding: var(--space-6);
     }
 
-    .component-number {
-      font-size: 2rem;
+    .component-side {
+      flex-direction: row;
+      align-items: center;
     }
 
-    .capabilities-list {
+    .component-rule {
+      flex: 1;
+    }
+
+    .security-card {
       grid-template-columns: 1fr;
     }
 
-    .tech-stack-grid,
     .security-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .capabilities-list {
       grid-template-columns: 1fr;
     }
   }

@@ -1,14 +1,20 @@
 export const industriesContent = {
   hero: {
-    title: 'Industries We Serve',
-    description: 'ARTE adapts to your industry-specific needs with tailored solutions and compliance standards'
+    eyebrow: 'Industries',
+    title: 'Built for',
+    titleAccent: 'every regulated industry.',
+    description:
+      'ARTE adapts to the data, the compliance posture, and the operational realities of your sector — without hidden assumptions or vendor lock-in.'
   },
   industries: [
     {
       title: 'Government',
-      description: 'Secure, compliant MLOps solutions for public sector organizations. Support for sensitive data handling and regulatory requirements.',
+      tagline: 'Public-sector AI, deployed responsibly.',
+      icon: 'government',
+      description:
+        'Secure, compliant MLOps for agencies handling sensitive data and regulated workflows. From citizen services to fraud prevention, ARTE meets you where you operate.',
       features: [
-        'FedRAMP authorized infrastructure',
+        'FedRAMP-aligned infrastructure',
         'Advanced security and encryption',
         'Audit trails and compliance reporting',
         'On-premise deployment options'
@@ -17,12 +23,15 @@ export const industriesContent = {
         'Fraud detection and prevention',
         'Citizen service optimization',
         'Predictive maintenance',
-        'Resource allocation optimization'
+        'Resource allocation'
       ]
     },
     {
       title: 'Enterprise',
-      description: 'Scale your AI initiatives across the organization with enterprise-grade MLOps. Accelerate digital transformation and drive business value.',
+      tagline: 'AI that scales with the business.',
+      icon: 'enterprise',
+      description:
+        'Operationalize machine learning across business units. Multi-tenant architecture, SSO, and enterprise-grade SLAs — so AI moves from experiment to revenue.',
       features: [
         'Multi-tenant architecture',
         'SSO and identity management',
@@ -38,7 +47,10 @@ export const industriesContent = {
     },
     {
       title: 'Education',
-      description: 'Empower research institutions and universities with cutting-edge ML infrastructure. Foster innovation and accelerate academic research.',
+      tagline: 'Research-grade ML for institutions.',
+      icon: 'education',
+      description:
+        'Empower researchers, faculty, and students with shared infrastructure for experimentation. Governance and resource controls included.',
       features: [
         'Collaborative workspaces',
         'Academic pricing',
@@ -54,7 +66,10 @@ export const industriesContent = {
     },
     {
       title: 'Healthcare',
-      description: 'HIPAA-compliant MLOps platform for healthcare organizations. Transform patient care with AI-powered insights while maintaining data privacy.',
+      tagline: 'Privacy-first AI for patient care.',
+      icon: 'healthcare',
+      description:
+        'HIPAA-aligned MLOps for hospitals, payers, and life sciences. Improve outcomes without compromising on PHI protection or auditability.',
       features: [
         'HIPAA compliance',
         'PHI data protection',
@@ -68,5 +83,10 @@ export const industriesContent = {
         'Hospital operations efficiency'
       ]
     }
-  ]
+  ],
+  finalCta: {
+    title: 'Not sure where ARTE fits?',
+    body: 'Tell us about your data, your stack, and what you are trying to achieve. We will show you the shortest path to production.',
+    primary: 'Schedule a consultation'
+  }
 };

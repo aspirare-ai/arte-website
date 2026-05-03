@@ -1,75 +1,116 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'small' | 'medium' | 'large';
+  external?: boolean;
 }
 
-const { href, variant = 'primary', size = 'medium' } = Astro.props;
+const { href, variant = 'primary', size = 'medium', external = false } = Astro.props;
+const target = external ? '_blank' : undefined;
+const rel = external ? 'noopener noreferrer' : undefined;
 ---
 
-<a href={href} class={`btn btn-${variant} btn-${size}`}>
-  <slot />
+<a href={href} class={`btn btn-${variant} btn-${size}`} target={target} rel={rel}>
+  <span class="btn-label"><slot /></span>
+  {variant !== 'ghost' && <span class="btn-arrow" aria-hidden="true">→</span>}
 </a>
 
 <style>
   .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     text-decoration: none;
+    font-family: var(--font-sans);
     font-weight: 600;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-pill);
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     text-align: center;
     cursor: pointer;
+    border: 1.5px solid transparent;
+    white-space: nowrap;
+    line-height: 1;
   }
 
+  .btn-arrow {
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Sizes */
   .btn-small {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.875rem;
   }
 
   .btn-medium {
-    padding: 0.875rem 1.75rem;
-    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
   }
 
   .btn-large {
-    padding: 1.125rem 2.5rem;
-    font-size: 1.125rem;
+    padding: 1rem 1.85rem;
+    font-size: 1rem;
   }
 
+  /* Primary — solid blue */
   .btn-primary {
-    background: #0066cc;
-    color: white;
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
   }
 
   .btn-primary:hover {
-    background: #0052a3;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+    background: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px -12px rgba(31, 79, 192, 0.55);
   }
 
+  /* Secondary — dark ink */
   .btn-secondary {
-    background: #2d2d2d;
-    color: white;
+    background: var(--color-ink);
+    color: #ffffff;
+    border-color: var(--color-ink);
   }
 
   .btn-secondary:hover {
-    background: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    background: #000000;
+    color: #ffffff;
+    transform: translateY(-1px);
   }
 
+  /* Outline — bordered */
   .btn-outline {
     background: transparent;
-    color: #0066cc;
-    border: 2px solid #0066cc;
+    color: var(--color-ink);
+    border-color: var(--color-line-strong);
   }
 
   .btn-outline:hover {
-    background: #0066cc;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.2);
+    background: var(--color-ink);
+    color: #ffffff;
+    border-color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost — text-only */
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-accent-dark);
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-accent-darker);
   }
 </style>

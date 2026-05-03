@@ -1,61 +1,71 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { legalContent } from '../content/legal';
+
+const doc = legalContent.privacy;
 ---
 
 <Layout title="Privacy Policy">
-  <section class="legal-page section">
-    <div class="container">
-      <div class="legal-content">
-        <h1 class="legal-title">{legalContent.privacy.title}</h1>
-        <p class="legal-updated">Last Updated: {legalContent.privacy.lastUpdated}</p>
+  <section class="legal-hero">
+    <div class="container-narrow">
+      <span class="eyebrow">Legal</span>
+      <h1 class="legal-title">{doc.title}</h1>
+      <p class="legal-updated">Last updated: {doc.lastUpdated}</p>
+    </div>
+  </section>
 
-        <div class="legal-sections">
-          {legalContent.privacy.sections.map(section => (
-            <div class="legal-section">
-              <h2 class="section-title">{section.title}</h2>
-              <p class="section-content">{section.content}</p>
-            </div>
-          ))}
-        </div>
+  <section class="legal-body">
+    <div class="container-narrow">
+      <div class="legal-sections">
+        {doc.sections.map((section, idx) => (
+          <article class="legal-section">
+            <span class="legal-section-num">{String(idx + 1).padStart(2, '0')}</span>
+            <h2 class="legal-section-title">{section.title}</h2>
+            <p class="legal-section-content">{section.content}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="legal-footer">
+        <p>Questions about this policy? <a href="/contact">Reach out to our team</a>.</p>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .legal-page {
-    padding: 4rem 2rem 6rem;
-  }
-
-  .legal-content {
-    max-width: 900px;
-    margin: 0 auto;
+  .legal-hero {
+    padding: clamp(3.5rem, 6vw, 5rem) 0 var(--space-7);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .legal-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    margin-bottom: 1rem;
-    color: #1a1a1a;
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    margin: var(--space-4) 0 var(--space-3);
+    letter-spacing: -0.035em;
   }
 
   .legal-updated {
-    color: #808080;
+    color: var(--color-ink-muted);
     font-size: 0.95rem;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    margin: 0;
+  }
+
+  .legal-body {
+    padding: var(--space-8) 0 var(--space-9);
   }
 
   .legal-sections {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: var(--space-7);
   }
 
   .legal-section {
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+    position: relative;
   }
 
   .legal-section:last-child {
@@ -63,26 +73,40 @@ import { legalContent } from '../content/legal';
     padding-bottom: 0;
   }
 
-  .section-title {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    color: #2d2d2d;
+  .legal-section-num {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    letter-spacing: 0.02em;
   }
 
-  .section-content {
-    color: #4a4a4a;
-    line-height: 1.8;
+  .legal-section-title {
+    font-size: 1.6rem;
+    margin: 0 0 var(--space-3);
+    letter-spacing: -0.02em;
+  }
+
+  .legal-section-content {
+    color: var(--color-ink-soft);
+    line-height: 1.75;
     font-size: 1.05rem;
     margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .legal-page {
-      padding: 3rem 1.5rem 4rem;
-    }
+  .legal-footer {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
 
-    .section-title {
-      font-size: 1.5rem;
-    }
+  .legal-footer p {
+    margin: 0;
+    color: var(--color-ink-soft);
   }
 </style>

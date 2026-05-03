@@ -1,7 +1,9 @@
 export const siteConfig = {
   name: 'ARTE',
-  title: 'ARTE - Enterprise MLOps Platform',
-  description: 'Advanced machine learning operations platform for enterprise-scale AI deployment',
+  title: 'ARTE — Enterprise MLOps Platform',
+  tagline: 'AI/ML operations, engineered for the enterprise.',
+  description:
+    'ARTE is a secure, privacy-first MLOps platform that takes models from prototype to production — with continuous learning built in.',
   contact: {
     email: 'contact@arte-platform.com',
     phone: '+1 (555) 123-4567',
