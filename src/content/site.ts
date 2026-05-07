@@ -5,13 +5,13 @@ export const siteConfig = {
   description:
     'ARTE is a secure, privacy-first MLOps platform that takes models from prototype to production — with continuous learning built in.',
   contact: {
-    email: 'contact@arte-platform.com',
-    phone: '+1 (555) 123-4567',
-    address: '123 Innovation Drive, Tech Valley, CA 94025'
+    email: 'joshua.chan@aspirare.ai',
+    phone: '+1 (613) 867-0689',
+    address: 'Ottawa, Ontario, Canada'
   },
   social: {
-    linkedin: 'https://linkedin.com/company/arte-platform',
-    twitter: 'https://twitter.com/arte_platform',
-    github: 'https://github.com/arte-platform'
+    linkedin: '',
+    twitter: '',
+    github: ''
   }
-};
+}

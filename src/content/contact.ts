@@ -28,20 +28,20 @@ export const contactContent = {
     methods: [
       {
         type: 'Email',
-        value: 'contact@arte-platform.com',
+        value: 'joshua.chan@aspirare.ai',
         description: 'General inquiries, demos, and partnership discussions.',
-        action: 'mailto:contact@arte-platform.com'
+        action: 'mailto:joshua.chan@aspirare.ai'
       },
       {
         type: 'Phone',
-        value: '+1 (555) 123-4567',
+        value: '+1 (613) 867-0689',
         description: 'Speak directly with someone on the platform team.',
-        action: 'tel:+15551234567'
+        action: 'tel:+16138670689'
       },
       {
         type: 'Address',
-        value: '123 Innovation Drive, Tech Valley, CA 94025',
-        description: 'Visit our headquarters or schedule an on-site session.',
+        value: 'Ottawa, Ontario, Canada',
+        description: 'We have presence in Ottawa and Vancouver.',
         action: null
       }
     ]
@@ -51,6 +51,6 @@ export const contactContent = {
     title: 'Engineers, scientists,',
     titleAccent: 'and operators.',
     description:
-      'ARTE is developed by a team of ML engineers, data scientists, and enterprise software veterans who have lived through the painful parts of MLOps — and built the platform we wish we had.'
+      'ARTE is developed by a team of AI/ML engineers, data scientists, and enterprise software veterans who have lived through the painful parts of MLOps — and built the platform we wish we had.'
   }
-};
+}
