@@ -10,13 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.2.5"
+    "astro": "^6.3.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.7.5",
-    "eslint": "^8.51.0",
-    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint": "^10.0.0",
+    "eslint-config-love": "154.0.0",
     "eslint-plugin-astro": "^0.29.1",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
@@ -27,8 +27,5 @@
     "prettier-plugin-astro": "^0.12.0",
     "sharp": "^0.32.6",
     "typescript": "*"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
   }
 }
