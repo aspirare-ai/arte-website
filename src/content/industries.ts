@@ -14,8 +14,6 @@ export const industriesContent = {
       description:
         'Secure, compliant MLOps for agencies handling sensitive data and regulated workflows. From citizen services to fraud prevention, ARTE meets you where you operate.',
       features: [
-        'FedRAMP-aligned infrastructure',
-        'Advanced security and encryption',
         'Audit trails and compliance reporting',
         'On-premise deployment options'
       ],
@@ -31,10 +29,10 @@ export const industriesContent = {
       tagline: 'AI that scales with the business.',
       icon: 'enterprise',
       description:
-        'Operationalize machine learning across business units. Multi-tenant architecture, SSO, and enterprise-grade SLAs — so AI moves from experiment to revenue.',
+        'Operationalize machine learning across business units. Multi-tenant architecture, and enterprise-grade SLAs — so AI moves from pilot to revenue.',
       features: [
         'Multi-tenant architecture',
-        'SSO and identity management',
+        'Identity management',
         'Custom integrations',
         'Dedicated support and SLAs'
       ],
@@ -69,7 +67,7 @@ export const industriesContent = {
       tagline: 'Privacy-first AI for patient care.',
       icon: 'healthcare',
       description:
-        'HIPAA-aligned MLOps for hospitals, payers, and life sciences. Improve outcomes without compromising on PHI protection or auditability.',
+        'HIPAA-aligned MLOps for hospitals, clinics, and life sciences. Improve outcomes without compromising on PHI protection or auditability.',
       features: [
         'HIPAA compliance',
         'PHI data protection',
@@ -89,4 +87,4 @@ export const industriesContent = {
     body: 'Tell us about your data, your stack, and what you are trying to achieve. We will show you the shortest path to production.',
     primary: 'Schedule a consultation'
   }
-};
+}
