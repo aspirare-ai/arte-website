@@ -87,4 +87,4 @@ export const industriesContent = {
     body: 'Tell us about your data, your stack, and what you are trying to achieve. We will show you the shortest path to production.',
     primary: 'Schedule a consultation'
   }
-}
+};
