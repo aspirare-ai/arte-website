@@ -1,7 +1,7 @@
 {
   "name": "@arte/website",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,19 +13,19 @@
     "astro": "^6.3.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.7.5",
-    "eslint": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^9.35.0",
     "eslint-config-love": "154.0.0",
-    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
-    "prettier": "^3.0.3",
+    "eslint-plugin-n": "^18.0.1",
+    "eslint-plugin-promise": "^7.3.0",
+    "prettier": "^3.8.3",
     "prettier-config-standard": "^7.0.0",
-    "prettier-plugin-astro": "^0.12.0",
-    "sharp": "^0.32.6",
-    "typescript": "*"
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.34.5",
+    "typescript": "^6.0.3"
   }
 }

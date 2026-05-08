@@ -10,8 +10,8 @@ export const homeContent = {
       secondary: 'See how ARTE works'
     },
     stats: [
-      { value: '70%', label: 'Faster time-to-deployment' },
-      { value: 'SOC 2', label: 'Type II ready' },
+      { value: '80%', label: 'Faster time-to-deployment' },
+      { value: '1', label: 'Click to deploy model to production ' },
       { value: '24/7', label: 'Continuous monitoring' }
     ]
   },
@@ -31,7 +31,7 @@ export const homeContent = {
         bullets: [
           'Drag-and-drop pipeline builder',
           'Multi-framework support',
-          'Distributed, auto-scaling compute'
+          'Distributed compute'
         ]
       },
       {
@@ -67,11 +67,11 @@ export const homeContent = {
     items: [
       {
         title: 'Faster delivery',
-        body: 'Cut time-to-deployment by up to 70% with automated pipelines and one-click promotion to production.'
+        body: 'Cut time-to-deployment by up to 80% with automated pipelines and one-click promotion to production.'
       },
       {
         title: 'Enterprise security',
-        body: 'End-to-end encryption, RBAC, audit trails, and a privacy-first architecture designed for regulated industries.'
+        body: 'Secure, RBAC, audit trails, and a privacy-first architecture designed for regulated industries.'
       },
       {
         title: 'Fits your stack',
@@ -87,7 +87,12 @@ export const homeContent = {
     eyebrow: 'Trusted approach',
     headline: 'Privacy and security are not features. They are the foundation.',
     body: 'ARTE was built from the ground up for organizations where data sensitivity, compliance, and operational reliability are non-negotiable. Every model, every prediction, every audit log lives where you decide.',
-    chips: ['SOC 2 Type II ready', 'GDPR aligned', 'HIPAA ready', 'On-prem capable', 'Role-based access', 'End-to-end encryption']
+    chips: [
+      'GDPR aligned',
+      'HIPAA ready',
+      'On-prem capable',
+      'Role-based access'
+    ]
   },
   finalCta: {
     title: 'See ARTE in your environment.',
@@ -95,4 +100,4 @@ export const homeContent = {
     primary: 'Book a demo',
     secondary: 'Talk to the team'
   }
-};
+}
